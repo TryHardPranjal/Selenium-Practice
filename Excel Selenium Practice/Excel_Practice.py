@@ -26,19 +26,3 @@ for i in range(1,sheet.max_column):
 #             if sheet.cell(row=k,column=j).value == "Apple":
 #                 Dict["Row"]=k
 #                 break
-
-print(Dict)
-# print(sheet.cell(row=Dict["Row"],column=Dict["Column"]).value)
-
-file_input=driver.find_element(By.CSS_SELECTOR,"input[type='file']")
-
-file_input.send_keys(file_path)
-
-wait=WebDriverWait(driver,5)
-toast_locator=(By.CSS_SELECTOR,".Toastify__toast-body")
-wait.until(expected_conditions.visibility_of_element_located(toast_locator))
-print(driver.find_element(*toast_locator).text)
-
-Answer=input("Enter A to quit: ")
-if Answer=="A":
-    driver.quit()
