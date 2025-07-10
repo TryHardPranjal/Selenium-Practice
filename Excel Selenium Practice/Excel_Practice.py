@@ -1,24 +1,24 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 import openpyxl
-
-driver=webdriver.Chrome()
 file_path="C://Users//pc//Downloads//download.xlsx"
-driver.get("https://rahulshettyacademy.com/upload-download-test/")
-driver.implicitly_wait(5)
-driver.find_element(By.ID,"downloadButton").click()
-
 book=openpyxl.load_workbook(file_path)
 sheet=book.active
 Dict={}
 print(sheet.cell(row=3,column=4).value)
 
-for i in range(1,sheet.max_column):
-    if sheet.cell(row=1,column=i).value == "Fruit Name":
-        print(i)
+for i in range(1,sheet.max_column+1):
+    if sheet.cell(row=1,column=i).value == "fruit_name":
+        Dict['column']=i
+    elif sheet.cell(row=1,column=i).value == "price":
+        Dict['column_price']=i
+
+for j in range(1,sheet.max_row+1):
+    if sheet.cell(row=j,column=Dict['column']).value == "Apple":
+        Dict["row"]=j
         break
+
+print(Dict)
+print(sheet.cell(row=Dict['row'],column=Dict['column']).value)
+print(sheet.cell(row=Dict['row'],column=Dict['column_price']).value)
 
 # for j in range(1,sheet.max_column):
 #     if sheet.cell(row=1,column=j).value == "Fruit name":
