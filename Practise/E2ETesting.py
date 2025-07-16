@@ -30,6 +30,7 @@ Sucess_msg=driver.find_element(By.XPATH,"//div[@class='alert alert-success alert
 print(Sucess_msg)
 assert "Success! Thank you!" in Sucess_msg
 
+#for the driver to not close.
 Answer=input("Enter A to quit: ")
 if Answer=="A":
     driver.quit()
