@@ -25,20 +25,17 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="function")
 def browserInstance(request):
     from selenium import webdriver
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support.wait import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
     from selenium.webdriver.chrome.options import Options
 
     options = Options()
     options.add_experimental_option("prefs", {
         "credentials_enable_service": False,  # Disable password manager
-        "profile.password_manager_enabled": False  # Disable password saving prompt
+        "profile.password_manager_enabled": False  # Disable password-saving prompt
     })
     options.add_argument("--incognito")
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
-    # options.add_argument("--disable-notifications")  # Block notification popups
-    # options.add_argument("--disable-popup-blocking")  # Avoid pop-up blocks
+    # options.add_argument("--disable-notifications") # Block notification popups
+    # options.add_argument("--disable-popup-blocking") # Avoid pop-up blocks
     # options.add_argument("--log-level=3")
     browser_name=request.config.getoption("browser_name")
     if browser_name=="chrome":
