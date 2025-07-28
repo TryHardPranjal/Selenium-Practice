@@ -10,7 +10,7 @@ class LoginPage:
 
 
 
-    def login(self):
-        self.driver.find_element(*self.username).send_keys("rahulshettyacademy")
-        self.driver.find_element(*self.password).send_keys("learning")
+    def login(self,username,password):
+        self.driver.find_element(*self.username).send_keys(username)
+        self.driver.find_element(*self.password).send_keys(password)
         self.driver.find_element(*self.signin_button).click()

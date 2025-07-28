@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import wait
+
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -20,7 +20,6 @@ class Checkout_confirmtion:
 
     def enter_delivery_address(self,country_first3_letters):
         self.driver.find_element(*self.enter_ini_country).send_keys(country_first3_letters)
-        #self.driver.find_element(*self.select_Checkbox).click()
 
         self.wait.until(EC.presence_of_element_located(self.check_named_Country))
         self.driver.find_element(*self.check_named_Country).click()

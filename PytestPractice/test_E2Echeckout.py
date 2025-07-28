@@ -1,30 +1,26 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import json
 
 import pytest
-from selenium.webdriver.support.wait import WebDriverWait
 
 from POM.CheckoutandConfimation import Checkout_confirmtion
 from POM.Login import LoginPage
 from POM.Shop import ShopPage
 
-
-def test_Fixtureconfig(setup):
-    print("Good Morning")
-    a=2
-    b=4
-    assert a==b,"Not equal"
+file_path_data='C:/Users/pc/PycharmProjects/Selenium-Practice/Data/E2Edata.json'
+with open(file_path_data) as f:
+    test_data = json.load(f)
+    test_list=test_data["data"]
 
 
-def test_E2Etest(browserInstance):
+@pytest.mark.parametrize("test_list_item",test_list)
+def test_E2Etest(browserInstance, test_list_item):
     driver = browserInstance
     driver.get("https://rahulshettyacademy.com/loginpagePractise/")
     login=LoginPage(driver)
-    login.login()
+    login.login(test_list_item["username"],test_list_item["password"])
 
     Shop_page=ShopPage(driver)
-    Shop_page.add_products_to_cart("Blackberry")
+    Shop_page.add_products_to_cart(test_list_item["productName"])
     Shop_page.got_to_Checkout_page()
 
     Check_and_confirm=Checkout_confirmtion(driver)

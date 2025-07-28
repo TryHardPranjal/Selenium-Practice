@@ -43,7 +43,9 @@ def browserInstance(request):
     elif browser_name=="firefox":
         driver = webdriver.Firefox(options=options)
 
+    driver.get("https://rahulshettyacademy.com/loginpagePractise/")
     driver.implicitly_wait(4)
+
     yield driver
     driver.quit()
 
