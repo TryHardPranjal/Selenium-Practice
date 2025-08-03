@@ -1,8 +1,11 @@
 from selenium.webdriver.common.by import By
 
+from utils.browserutils import BrowserUtils
 
-class ShopPage:
+
+class ShopPage(BrowserUtils):
     def __init__(self, driver):
+        super().__init__(driver)
         self.driver = driver
         self.Shop_link=(By.LINK_TEXT,"Shop")
         self.products_carts=(By.XPATH, "//div[@class='card h-100']")

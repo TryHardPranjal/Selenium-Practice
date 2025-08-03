@@ -11,19 +11,22 @@ with open(file_path_data) as f:
     test_data = json.load(f)
     test_list=test_data["data"]
 
-
+@pytest.mark.smoke
 @pytest.mark.parametrize("test_list_item",test_list)
 def test_E2Etest(browserInstance, test_list_item):
     driver = browserInstance
     driver.get("https://rahulshettyacademy.com/loginpagePractise/")
     login=LoginPage(driver)
+    print(login.get_title())
     login.login(test_list_item["username"],test_list_item["password"])
 
     Shop_page=ShopPage(driver)
+    print(Shop_page.get_title())
     Shop_page.add_products_to_cart(test_list_item["productName"])
     Shop_page.got_to_Checkout_page()
 
     Check_and_confirm=Checkout_confirmtion(driver)
+    print(Check_and_confirm.get_title())
     Check_and_confirm.go_to_Checkout_page()
     Check_and_confirm.enter_delivery_address("ind")
     Check_and_confirm.validate_order()
